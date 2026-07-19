@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: HR_RAG_Assistant
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ragdb
+    username: postgres
+    password: postgres
+  ai:
+    vectorstore:
+      pgvector:
+        initialize-schema: true        # create extension, table and index at first start
+        index-type: HNSW               # neighbor aprox search index
+        distance-type: COSINE_DISTANCE # embedding setence distance
+        table-name: vector_store
+    chat:
+      memory:
+        redis:
+          host: localhost
+          port: 6379
+          time-to-live: PT30M          # chat expires after 30 min of inactivity
+
+  app:
+    rag:
+      top-k: 5                           # how many chunks QuestionAnswerAdvisor retrieves
+      similarity-threshold: 0.4          # retrieval similarity threshold
+    memory:
+      max-messages: 20                   # range size of MessageWindowChatMemory
+
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: DEBUG
+    sugarcube.rh_rag_assistant.chat.PromptLoggingAdvisor: DEBUG
+    sugarcube.rh_rag_assistant.advisor.PromptLoggingAdvisor: DEBUG
+    sugarcube.rh_rag_assistant.PromptLoggingAdvisor: DEBUG

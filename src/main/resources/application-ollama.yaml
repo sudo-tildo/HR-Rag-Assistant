@@ -1,0 +1,12 @@
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11435
+      embedding:
+        model: bge-m3
+      chat:
+        model: 4skl/gemma4-12b-mtp
+        temperature: 0.1
+    vectorstore:
+      pgvector:
+        dimensions: 1024 # matches bge-m3 output

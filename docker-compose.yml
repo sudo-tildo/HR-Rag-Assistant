@@ -1,0 +1,34 @@
+services:
+  db:
+    image: pgvector/pgvector:pg18
+    environment:
+      POSTGRES_DB: ragdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports: [ "5432:5432" ]
+    volumes: [ "pgdata:/var/lib/postgresql" ]
+  redis:
+    image: redis/redis-stack:latest
+    ports: [ "6379:6379", "8001:8001" ]
+    volumes: [ "redisdata:/data" ]
+  ollama:
+    image: ollama/ollama:latest
+    ports: [ "11435:11434" ]
+    volumes: [ "ollama:/root/.ollama" ]
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - |
+        ollama serve &
+        pid=$$!
+        until ollama list >/dev/null 2>&1; do sleep 1; done
+        ollama pull bge-m3
+        wait $$pid
+    healthcheck:
+      test: [ "CMD-SHELL", "ollama list 2>/dev/null | grep -q bge-m3 || exit 1" ]
+      interval: 10s
+      start_period: 60s
+
+volumes:
+  pgdata:
+  redisdata:
+  ollama:
