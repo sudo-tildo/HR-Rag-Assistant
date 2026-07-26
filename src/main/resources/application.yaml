@@ -12,6 +12,7 @@ spring:
         index-type: HNSW               # neighbor aprox search index
         distance-type: COSINE_DISTANCE # embedding setence distance
         table-name: vector_store
+        dimensions: 1024
     chat:
       memory:
         redis:

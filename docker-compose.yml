@@ -22,6 +22,7 @@ services:
         pid=$$!
         until ollama list >/dev/null 2>&1; do sleep 1; done
         ollama pull bge-m3
+        ollama pull gemma3:4b
         wait $$pid
     healthcheck:
       test: [ "CMD-SHELL", "ollama list 2>/dev/null | grep -q bge-m3 || exit 1" ]
