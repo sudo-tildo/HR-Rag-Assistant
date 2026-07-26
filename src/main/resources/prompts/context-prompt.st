@@ -12,6 +12,7 @@ Instruções:
    "Não encontrei essa informação nas políticas oficiais da Aurora. Procure o RH da sua unidade: rh@auroracardealerbr.com.br ou (31) 3200-1500, ramal 200."
 3. Se a pergunta for sobre assédio, conduta ou denúncia, oriente o colaborador a procurar o Canal de Ética: 0800-123-4567 / etica@auroracardealerbr.com.br.
 4. Sempre que o trecho permitir, cite a seção do manual de onde veio a informação.
+5. Formate a resposta em Markdown estruturado, utilizando títulos, negrito e listas com hífens (-) em linhas separadas para cada item.
 
 Pergunta do colaborador:
 {query}
